@@ -1,5 +1,5 @@
 # app/schemas/user.py
-from pydantic import BaseModel, HttpUrl, Field
+from pydantic import BaseModel, EmailStr, HttpUrl, Field
 from typing import Optional
 from datetime import datetime
 from enum import Enum
@@ -19,6 +19,8 @@ class UserBase(BaseModel):
     description: Optional[str] = Field(None, example="A brief description of the user.")
     image_url: Optional[HttpUrl] = Field(None, example="http://example.com/image.png")
     voice_url: Optional[HttpUrl] = Field(None, example="http://example.com/voice.mp3")
+    email: Optional[EmailStr] = Field(None, example="test@test.com")
+    is_processed: Optional[int] = Field(None)
 
 
 # Properties to receive via API on creation
@@ -36,6 +38,8 @@ class UserUpdate(BaseModel):
     description: Optional[str] = Field(None, example="A new description.")
     image_url: Optional[HttpUrl] = Field(None, example="http://example.com/new_image.png")
     voice_url: Optional[HttpUrl] = Field(None, example="http://example.com/new_voice.mp3")
+    email: Optional[EmailStr] = Field(None, example="test@test.com")
+
 
 
 # Properties stored in DB and returned by API

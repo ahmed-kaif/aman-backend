@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     SUPABASE_URL: AnyHttpUrl
     SUPABASE_KEY: str
+    GOOGLE_API_KEY: str
     
     # To load environment variables from a .env file, uncomment the following line
     model_config = SettingsConfigDict(env_file=".env")
