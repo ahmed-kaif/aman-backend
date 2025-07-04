@@ -1,0 +1,7 @@
+"fastapi[all]"
+pydantic
+pydantic-settings
+httpx
+google-generativeai
+supabase
+python-dotenv
