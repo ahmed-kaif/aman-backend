@@ -1,5 +1,5 @@
 # app/main.py
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
 from app.core.config import settings
 from app.routers import users
 from fastapi.middleware.cors import CORSMiddleware
@@ -24,6 +24,17 @@ app.add_middleware(
 def read_root():
     return {"message": f"Welcome to {settings.APP_NAME}"}
 
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html(req: Request):
+    root_path = req.scope.get("root_path", "").rstrip("/")
+    openapi_url = root_path + app.openapi_url
+    return get_swagger_ui_html(
+        openapi_url=openapi_url,
+        title="API",
+    )
+@app.get("/healthz", include_in_schema=False)
+async def check_api_health():
+    return {"status": "OK"}
 # Include the users router
 app.include_router(
     users.router, 
